@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
 
 const Input = ({
@@ -15,9 +16,9 @@ const Input = ({
     required,
 }) => {
     return (
-        <div className="flex flex-col gap-2.5 text-xl">
+        <div className="flex flex-col gap-2.5 text-lg">
             {label ? (
-                <label htmlFor={id} className="text-2xl font-medium">
+                <label htmlFor={id} className="text-xl font-medium">
                     {label}{" "}
                     {required ? <span className="text-red-500">*</span> : <></>}
                 </label>
@@ -27,10 +28,12 @@ const Input = ({
             <div className="relative p-0 m-0">
                 <div
                     className={
-                        icon ? "p-0 m-0 absolute left-2 top-3" : "hidden"
+                        icon
+                            ? "p-0 m-0 absolute left-2 top-3 text-indigo-600"
+                            : "hidden"
                     }
                 >
-                    {icon}
+                    <FontAwesomeIcon icon={icon} />
                 </div>
                 <input
                     id={id}
@@ -42,9 +45,9 @@ const Input = ({
                     disabled={disabled}
                     className={
                         type != "radio" && type != "checkbox"
-                            ? "h-12 pl-9 border-0 border-b-2 border-blue-500 focus:border-violet-400 focus:outline-none transition rounded-md" +
+                            ? "h-12 pl-9 border-0 border-b-2 border-blue-500 focus:border-violet-500 hover:border-indigo-500 focus:outline-none transition ease-linear rounded-md" +
                               style
-                            : "w-6 h-6"
+                            : "w-6 h-6 accent-indigo-500"
                     }
                 />
             </div>
@@ -62,7 +65,7 @@ Input.propTypes = {
     style: PropTypes.string,
     label: PropTypes.string,
     id: PropTypes.string,
-    icon: PropTypes.element,
+    icon: PropTypes.object,
     value: PropTypes.any,
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
