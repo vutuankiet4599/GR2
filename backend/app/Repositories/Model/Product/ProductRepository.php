@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Repositories\Post;
+namespace App\Repositories\Model\Product;
 
 use App\Repositories\BaseModelRepository;
-use App\Repositories\Product\ProductRepositoryInterface;
 
 class ProductRepository extends BaseModelRepository implements ProductRepositoryInterface
 {

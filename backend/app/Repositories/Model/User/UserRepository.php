@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Repositories\Post;
+namespace App\Repositories\Model\User;
 
 use App\Repositories\BaseModelRepository;
-use App\Repositories\Product\ProductRepositoryInterface;
 
-class ProductRepository extends BaseModelRepository implements ProductRepositoryInterface
+class UserRepository extends BaseModelRepository implements UserRepositoryInterface
 {
     public function getModel()
     {
