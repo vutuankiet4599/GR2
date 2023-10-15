@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Product;
+namespace App\Repositories\Model\User;
 
 use App\Repositories\ModelRepositoryInterface;
 
