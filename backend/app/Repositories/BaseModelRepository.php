@@ -209,6 +209,9 @@ abstract class BaseModelRepository implements ModelRepositoryInterface
                         break;
 
                     default:
+                        if (str_ends_with($list[$i], 'id')) {
+                            $list[$i] = substr_replace($list[$i], '_id', strlen($list[$i]) - 2);
+                        }
                         array_push($condition, $list[$i]);
                         break;
                 }
