@@ -6,6 +6,8 @@ import Loader from "../components/common/Loader";
 import Select from "../components/common/Select";
 import Modal from "../components/common/Modal";
 import Table from "../components/common/Table";
+import Textarea from "../components/common/Textarea";
+import Link from "../components/common/Link";
 
 const ComponentTest = () => {
     let [state, setState] = useState("");
@@ -17,6 +19,14 @@ const ComponentTest = () => {
 
     return (
         <div className="">
+            <Link link="/admin" title="Link" />
+            <Textarea
+                value={state}
+                onchange={handleChangeState}
+                placeholder={"input here"}
+                required
+                label={"Textarea"}
+            />
             <Input
                 name={"test"}
                 required={true}
