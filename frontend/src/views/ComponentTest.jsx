@@ -8,6 +8,7 @@ import Modal from "../components/common/Modal";
 import Table from "../components/common/Table";
 import Textarea from "../components/common/Textarea";
 import Link from "../components/common/Link";
+import Image from "../components/common/Image";
 
 const ComponentTest = () => {
     let [state, setState] = useState("");
@@ -19,6 +20,10 @@ const ComponentTest = () => {
 
     return (
         <div className="">
+            <Image
+                src="https://pbs.twimg.com/media/FB5J6usWEAEsV_6.jpg"
+                style="w-48 h-48"
+            />
             <Link link="/admin" title="Link" />
             <Textarea
                 value={state}
