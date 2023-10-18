@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+// To get pagination data: UserResource::collection(User::paginate)->response()->getData()
 class UserResource extends JsonResource
 {
     /**
@@ -18,7 +19,12 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'email' => $this->email,
             'name' => $this->name,
-            'avatar' => $this->avatar
+            'avatar' => $this->avatar,
+            'role' => new RoleResource($this->whenLoaded('role')),
+            'products' => ProductResource::collection($this->whenLoaded('products')),
+            'reviews' => ReviewResource::collection($this->whenLoaded('reviews')),
+            'orders' => OrderResource::collection($this->whenLoaded('orders')),
+            'userRequests' => UserRequestResource::collection($this->whenLoaded('userRequests')),
         ];
     }
 }

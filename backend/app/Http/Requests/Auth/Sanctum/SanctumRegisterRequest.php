@@ -27,7 +27,8 @@ class SanctumRegisterRequest extends FormRequest
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:6|max:255',
             'name' => 'required|string|min:6|max:255',
-            'avatar' => 'file|image|mimes:jpg,png,jpeg',
+            'avatar' => 'file|image|mimes:jpg,png,jpeg|nullable',
+            'phone' => 'string|max:12|min:10|nullable'
         ];
     }
 }
