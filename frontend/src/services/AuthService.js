@@ -1,3 +1,5 @@
+import authAPI from "../api/authAPI";
+
 const AuthService = {
     login: (email, password) => {
         console.log({ email: email, password: password });
@@ -13,8 +15,14 @@ const AuthService = {
     },
 
     getUser: () => {
-        console.log("Get current user");
-        return {};
+        return new Promise((resolve, reject) => {
+            try {
+                let response = authAPI.get("/user");
+                resolve(response);
+            } catch (error) {
+                reject(error);
+            }
+        });
     },
 };
 

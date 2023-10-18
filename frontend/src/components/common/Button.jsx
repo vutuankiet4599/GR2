@@ -9,7 +9,13 @@ let variantType = {
     warning: "bg-amber-500 hover:bg-amber-600 active:bg-amber-700",
 };
 
-const Button = ({ onclick, variant, title = "Button", type = "button" }) => {
+const Button = ({
+    onclick,
+    variant,
+    title = "Button",
+    type = "button",
+    style,
+}) => {
     return (
         <button
             type={type}
@@ -17,7 +23,9 @@ const Button = ({ onclick, variant, title = "Button", type = "button" }) => {
             className={
                 "p-3 text-lg border-none outline-none text-white rounded-md" +
                 " " +
-                variantType[variant]
+                variantType[variant] +
+                " " +
+                style
             }
         >
             {title}
@@ -30,6 +38,7 @@ Button.propTypes = {
     variant: PropTypes.string,
     title: PropTypes.string,
     type: PropTypes.string,
+    style: PropTypes.string,
 };
 
 export default Button;

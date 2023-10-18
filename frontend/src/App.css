@@ -8,3 +8,8 @@
 *::before {
     font-family: Roboto, sans-serif;
 }
+
+li.active {
+    background-color: rgb(99 102 241 / 1);
+    color: white;
+}

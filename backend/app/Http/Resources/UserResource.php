@@ -20,6 +20,8 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'name' => $this->name,
             'avatar' => $this->avatar,
+            'phone' => $this->phone,
+            'isActive' => $this->is_active,
             'role' => new RoleResource($this->whenLoaded('role')),
             'products' => ProductResource::collection($this->whenLoaded('products')),
             'reviews' => ReviewResource::collection($this->whenLoaded('reviews')),

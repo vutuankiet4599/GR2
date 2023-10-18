@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { SidebarItem } from "./SidebarItem";
 import {
     faAngleLeft,
     faAngleRight,
     faHome,
+    faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
+import AppContext from "../../../context/AppContext";
 
 const Sidebar = ({ style }) => {
     const [isShow, setIsShow] = useState(true);
+    const { data } = useContext(AppContext);
 
     return (
         <div
@@ -48,13 +51,23 @@ const Sidebar = ({ style }) => {
                 </div>
             </Link>
 
-            <div className="flex flex-col grow px-3 items-center">
-                <SidebarItem
-                    icon={faHome}
-                    title="Home"
-                    link="/admin"
-                    isShow={isShow}
-                />
+            <div className="flex flex-col grow px-3 items-center gap-2">
+                {data.user?.role?.name == "SUPER_ADMIN" && (
+                    <>
+                        <SidebarItem
+                            icon={faHome}
+                            title="Home"
+                            link="/admin"
+                            isShow={isShow}
+                        />
+                        <SidebarItem
+                            icon={faUser}
+                            title="User"
+                            link="/admin/users"
+                            isShow={isShow}
+                        />
+                    </>
+                )}
             </div>
         </div>
     );

@@ -10,7 +10,13 @@ const AppProvider = ({ children }) => {
 
     useEffect(() => {
         if (token && !user) {
-            setUser(AuthService.getUser(token));
+            AuthService.getUser()
+                .then((response) => {
+                    setUser(response.data.user);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
     }, [token, user]);
 

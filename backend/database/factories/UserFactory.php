@@ -30,6 +30,7 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'phone' => '348080406',
             'role_id' => $this->faker->numberBetween(2, 3),
+            'is_active' => true,
         ];
     }
 }

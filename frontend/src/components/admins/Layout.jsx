@@ -5,14 +5,14 @@ import Footer from "./Footer";
 import { useContext, useEffect } from "react";
 import AppContext from "../../context/AppContext";
 const AdminLayout = () => {
-    let { token } = useContext(AppContext);
+    let { data } = useContext(AppContext);
     let navigate = useNavigate();
 
     useEffect(() => {
-        if (!token) {
+        if (!data.token) {
             navigate("/");
         }
-    }, [token, navigate]);
+    }, [data.token, navigate]);
 
     return (
         <div className="flex relative">

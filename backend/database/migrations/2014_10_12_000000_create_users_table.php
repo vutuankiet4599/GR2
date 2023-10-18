@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->string('avatar')->nullable();
             $table->string('phone', 12)->nullable();
-            $table->boolean('is_active');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
