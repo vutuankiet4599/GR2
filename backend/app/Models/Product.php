@@ -18,6 +18,39 @@ class Product extends Model
         return 'products';
     }
 
+    protected $mappingProperties = [
+        'id' => [
+            'type' => 'keyword',
+        ],
+        'name' => [
+            'type' => 'text',
+            'analyzer' => 'standard',
+        ],
+        'address' => [
+            'type' => 'text',
+            'analyzer' => 'standard',
+        ],
+        'quantity' => [
+            'type' => 'numeric',
+            'analyzer' => 'standard',
+        ],
+        'description' => [
+            'type' => 'text',
+            'analyzer' => 'standard',
+        ],
+        'user_id' => [
+            'type' => 'keyword',
+        ],
+        'created_at' => [
+            'type' => 'date',
+            'analyzer' => 'standard',
+        ],
+        'updated_at' => [
+            'type' => 'date',
+            'analyzer' => 'standard',
+        ],
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
