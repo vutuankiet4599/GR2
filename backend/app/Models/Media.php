@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Media extends Model
 {
     use HasFactory;
-    
-    protected $fillable = ['name'];
 
-    public function users()
+    protected $fillable = ['link', 'product_id'];
+
+    public function product()
     {
-        return $this->hasMany(User::class);
+        $this->belongsTo(Product::class);
     }
 }
