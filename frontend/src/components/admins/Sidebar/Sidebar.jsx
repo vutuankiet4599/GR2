@@ -4,6 +4,7 @@ import {
     faAngleLeft,
     faAngleRight,
     faHome,
+    faListAlt,
     faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
@@ -64,6 +65,12 @@ const Sidebar = ({ style }) => {
                             icon={faUser}
                             title="User"
                             link="/admin/users"
+                            isShow={isShow}
+                        />
+                        <SidebarItem
+                            icon={faListAlt}
+                            title="Category"
+                            link={"/admin/categories"}
                             isShow={isShow}
                         />
                     </>
