@@ -19,7 +19,10 @@ class SanctumAuthRepository implements SanctumAuthRepositoryInterface
 
         $user = User::where('email', $email)->first();
 
-        $user->currentAccessToken()->delete();
+        if (!$user->is_active) {
+            return ['success' => false];
+        }
+        
         $token = $user->createToken('api-token')->plainTextToken;
 
         return [
@@ -52,6 +55,7 @@ class SanctumAuthRepository implements SanctumAuthRepositoryInterface
 
     public function logout($user)
     {
+        Auth::logout();
         $user->tokens()->delete();
 
         return [
@@ -65,7 +69,7 @@ class SanctumAuthRepository implements SanctumAuthRepositoryInterface
         return [
             'success' => true,
             'data' => [
-                'user' => new UserResource($user),
+                'user' => new UserResource($user->load('role')),
             ],
         ];
     }

@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
             'phone' => '0348080406',
             'role_id' => 1,
+            'is_active' => true,
         ]);
         User::factory(10)->create();
     }

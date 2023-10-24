@@ -103,6 +103,10 @@ abstract class BaseModelRepository implements ModelRepositoryInterface
             }
 
             if ($step == 1 && $list[$i] != 'and') {
+                if ($list[$i+1] != 'and') {
+                    $list[$i+1] = $list[$i].ucfirst($list[$i+1]);
+                    ++$i;
+                }
                 array_push($relations, $list[$i]);
             }
         }
@@ -211,6 +215,9 @@ abstract class BaseModelRepository implements ModelRepositoryInterface
                     default:
                         if (str_ends_with($list[$i], 'id')) {
                             $list[$i] = substr_replace($list[$i], '_id', strlen($list[$i]) - 2);
+                        }
+                        if (str_starts_with($list[$i], 'is')) {
+                            $list[$i] = 'is_'.str_replace('is', '', $list[$i]);
                         }
                         array_push($condition, $list[$i]);
                         break;
