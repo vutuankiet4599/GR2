@@ -26,15 +26,15 @@ const Input = ({
                 <></>
             )}
             <div className="relative p-0 m-0">
-                <div
-                    className={
-                        icon
-                            ? "p-0 m-0 absolute left-2 top-3 text-indigo-600"
-                            : "hidden"
-                    }
-                >
-                    <FontAwesomeIcon icon={icon} />
-                </div>
+                {icon && (
+                    <div
+                        className={
+                            "p-0 m-0 absolute left-2 top-3 text-indigo-600"
+                        }
+                    >
+                        <FontAwesomeIcon icon={icon} />
+                    </div>
+                )}
                 <input
                     id={id}
                     type={type}
@@ -45,7 +45,9 @@ const Input = ({
                     disabled={disabled}
                     className={
                         type != "radio" && type != "checkbox"
-                            ? "h-12 pl-9 border-0 border-b-2 border-blue-500 focus:border-violet-500 hover:border-indigo-500 focus:outline-none transition ease-linear rounded-md" +
+                            ? `h-12 ${
+                                  icon ? "pl-9" : "px-3"
+                              } border-0 border-b-2 border-blue-500 focus:border-violet-500 hover:border-indigo-500 focus:outline-none transition ease-linear rounded-md` +
                               style
                             : "w-6 h-6 accent-indigo-500"
                     }
