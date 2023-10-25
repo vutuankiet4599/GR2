@@ -2,18 +2,12 @@ import PropTypes from "prop-types";
 
 const Modal = ({ isShow = false, title = "", close, style = "", children }) => {
     return isShow ? (
-        <div className="z-50 fixed top-0 left-0 w-screen h-screen bg-slate-300 bg-opacity-50 flex items-center justify-center">
-            <div
-                className={
-                    "bg-white w-1/3 opacity-100 flex flex-col rounded-md" +
-                    " " +
-                    style
-                }
-            >
-                <div className="flex items-center justify-between p-5 border-b-2">
+        <div className="fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center bg-slate-300 bg-opacity-50">
+            <div className={"flex w-1/3 flex-col rounded-md bg-white opacity-100" + " " + style}>
+                <div className="flex items-center justify-between border-b-2 p-5">
                     <p className="text-lg font-medium">{title}</p>
                     <span
-                        className="text-lg font-medium p-2 rounded-md text-white bg-zinc-500 hover:bg-zinc-600 active:bg-zinc-700 cursor-pointer"
+                        className="cursor-pointer rounded-md bg-zinc-500 p-2 text-lg font-medium text-white hover:bg-zinc-600 active:bg-zinc-700"
                         onClick={close}
                     >
                         Close

@@ -15,11 +15,10 @@ const Textarea = ({
     label,
 }) => {
     return (
-        <div className="flex flex-col gap-2.5 text-lg w-full">
+        <div className="flex w-full flex-col gap-2.5 text-lg">
             {label ? (
                 <label htmlFor={id} className="text-xl font-medium">
-                    {label}{" "}
-                    {required ? <span className="text-red-500">*</span> : <></>}
+                    {label} {required ? <span className="text-red-500">*</span> : <></>}
                 </label>
             ) : (
                 <></>
@@ -34,13 +33,9 @@ const Textarea = ({
                 placeholder={placeholder}
                 disabled={disabled}
                 required={required}
-                className={`p-2.5 text-base outline-none text-gray-900 bg-gray-50 rounded-lg border-2 border-blue-500 focus:ring-indigo-500 focus:border-indigo-500 ${style}`}
+                className={`rounded-lg border-2 border-blue-500 bg-gray-50 p-2.5 text-base text-gray-900 outline-none focus:border-indigo-500 focus:ring-indigo-500 ${style}`}
             ></textarea>
-            {error ? (
-                <div className="text-red-500 text-lg">{error}</div>
-            ) : (
-                <></>
-            )}
+            {error ? <div className="text-lg text-red-500">{error}</div> : <></>}
         </div>
     );
 };

@@ -12,21 +12,16 @@ const Select = ({
     style,
 }) => {
     return (
-        <div
-            className={
-                "flex flex-col gap-3 p-0 items-start w-fit text-lg" + style
-            }
-        >
+        <div className={`flex w-fit flex-col items-start gap-2.5 p-0 text-lg ${style}`}>
             <label htmlFor={id} className="text-xl font-medium">
-                {label}{" "}
-                {required ? <span className="text-red-600">*</span> : <></>}
+                {label} {required ? <span className="text-red-600">*</span> : <></>}
             </label>
             <select
                 name={name}
                 id={id}
                 multiple={multiple}
                 required={required}
-                className="w-fit p-3 appearance-none rounded text-lg outline-none"
+                className="w-full appearance-none rounded p-3 text-lg outline-none"
                 onChange={onchange}
             >
                 <option defaultChecked value="">

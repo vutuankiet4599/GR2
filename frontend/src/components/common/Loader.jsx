@@ -4,11 +4,11 @@ const Loader = ({ isShow = false }) => {
     return isShow ? (
         <div
             role="status"
-            className="absolute top-0 left-0 w-full h-full bg-slate-300 bg-opacity-50 flex items-center justify-center"
+            className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-slate-300 bg-opacity-50"
         >
             <svg
                 aria-hidden="true"
-                className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-violet-600"
+                className="mr-2 h-8 w-8 animate-spin fill-violet-600 text-gray-200 dark:text-gray-600"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

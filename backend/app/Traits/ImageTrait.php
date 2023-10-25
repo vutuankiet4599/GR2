@@ -10,7 +10,7 @@ trait ImageTrait
     {
         $filePath = Storage::disk('local')->put('public/'.$foderName, $file);
         $dataUpload = [
-            'link' => Storage::url($filePath),
+            'link' => env("APP_URL", 'http://localhost:8000') . Storage::url($filePath),
         ];
 
         return $dataUpload;

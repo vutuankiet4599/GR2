@@ -9,6 +9,7 @@ import Table from "../components/common/Table";
 import Textarea from "../components/common/Textarea";
 import Link from "../components/common/Link";
 import Image from "../components/common/Image";
+import TextEditor from "../components/common/TextEditor";
 
 const ComponentTest = () => {
     let [state, setState] = useState("");
@@ -20,11 +21,9 @@ const ComponentTest = () => {
 
     return (
         <div className="">
-            <Image
-                src="https://pbs.twimg.com/media/FB5J6usWEAEsV_6.jpg"
-                style="w-48 h-48"
-            />
-            <Link link="/admin" title="Link" />
+            <TextEditor editorState={state} setEditorState={setState} />
+            <Image src="https://pbs.twimg.com/media/FB5J6usWEAEsV_6.jpg" style="w-48 h-48" />
+            <Link link="/admin">Hello</Link>
             <Textarea
                 value={state}
                 onchange={handleChangeState}
@@ -48,7 +47,7 @@ const ComponentTest = () => {
             <Button title={"New"} variant={"error"} />
             <Button title={"New"} variant={"primary"} />
             <Button title={"New"} variant={"secondary"} />
-            <div className="w-48 h-48 relative">
+            <div className="relative h-48 w-48">
                 <Loader isShow={true} />
             </div>
             <Select
@@ -60,11 +59,7 @@ const ComponentTest = () => {
                 required={true}
             />
 
-            <Button
-                title="Toggle Modal"
-                variant="primary"
-                onclick={() => setIsShow(true)}
-            />
+            <Button title="Toggle Modal" variant="primary" onclick={() => setIsShow(true)} />
             <Modal
                 isShow={isShow}
                 close={() => setIsShow(false)}

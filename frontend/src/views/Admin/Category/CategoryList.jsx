@@ -9,13 +9,15 @@ import Modal from "../../../components/common/Modal";
 import Input from "../../../components/common/Input";
 import ToastValidateError from "../../../services/ToastValidateError";
 
-const handleGetCategoriesAndSetState = (page, setCategories, setPagination) => {
+const handleGetCategoriesAndSetState = (page, setCategories, setPagination, setIsLoading) => {
     CategoryService.getAll(page)
         .then((response) => {
+            setIsLoading(false);
             setCategories(response.data.data);
             setPagination(response.data.meta);
         })
         .catch((error) => {
+            setIsLoading(false);
             toast.error(error.message);
         });
 };
@@ -31,13 +33,10 @@ const CategoryList = () => {
         delete: false,
     });
     const [category, setCategory] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        handleGetCategoriesAndSetState(
-            currentPage,
-            setCategories,
-            setPagination
-        );
+        handleGetCategoriesAndSetState(currentPage, setCategories, setPagination, setIsLoading);
     }, [currentPage]);
 
     const handlePageChange = (e) => {
@@ -65,6 +64,7 @@ const CategoryList = () => {
     };
 
     const handleCreateCategory = () => {
+        setIsLoading(true);
         CategoryService.insert({ name: category })
             .then((response) => {
                 setCategories([]);
@@ -73,7 +73,8 @@ const CategoryList = () => {
                 handleGetCategoriesAndSetState(
                     currentPage,
                     setCategories,
-                    setPagination
+                    setPagination,
+                    setIsLoading,
                 );
             })
             .catch((error) => {
@@ -83,6 +84,7 @@ const CategoryList = () => {
     };
 
     const handleUpdateCategory = () => {
+        setIsLoading(true);
         CategoryService.update(categories[selectedCategory].id, {
             name: category,
         })
@@ -93,7 +95,8 @@ const CategoryList = () => {
                 handleGetCategoriesAndSetState(
                     currentPage,
                     setCategories,
-                    setPagination
+                    setPagination,
+                    setIsLoading,
                 );
             })
             .catch((error) => {
@@ -103,6 +106,7 @@ const CategoryList = () => {
     };
 
     const handleDeleteCategory = () => {
+        setIsLoading(true);
         CategoryService.delete(categories[selectedCategory].id)
             .then((response) => {
                 setCategories([]);
@@ -111,7 +115,8 @@ const CategoryList = () => {
                 handleGetCategoriesAndSetState(
                     currentPage,
                     setCategories,
-                    setPagination
+                    setPagination,
+                    setIsLoading,
                 );
             })
             .catch((error) => {
@@ -122,12 +127,10 @@ const CategoryList = () => {
 
     return (
         <div className="relative flex flex-col gap-3">
-            <div className="px-6 py-4 flex items-center shadow bg-slate-50">
-                <p className="text-gray-900 font-bold text-xl">
-                    Category Management
-                </p>
+            <div className="flex items-center bg-slate-50 px-6 py-4 shadow">
+                <p className="text-xl font-bold text-gray-900">Category Management</p>
             </div>
-            <div className="w-48 h-fit">
+            <div className="h-fit w-48">
                 <Button
                     title="Create"
                     variant="success"
@@ -143,20 +146,16 @@ const CategoryList = () => {
                         id: category.id,
                         name: category.name,
                         action: (
-                            <div className="flex gap-2 items-center justify-start">
+                            <div className="flex items-center justify-start gap-2">
                                 <Button
                                     title="Update"
                                     variant="info"
-                                    onclick={() =>
-                                        handleToggleUpdateModal(index)
-                                    }
+                                    onclick={() => handleToggleUpdateModal(index)}
                                 />
                                 <Button
                                     title="Delete"
                                     variant="error"
-                                    onclick={() =>
-                                        handleToggleDeleteModal(index)
-                                    }
+                                    onclick={() => handleToggleDeleteModal(index)}
                                 />
                             </div>
                         ),
@@ -178,18 +177,14 @@ const CategoryList = () => {
                 title="Create new category"
                 close={handleToggleCreateModal}
             >
-                <div className="flex flex-col items-start justify-center gap-5 w-full px-8 py-6">
+                <div className="flex w-full flex-col items-start justify-center gap-5 px-8 py-6">
                     <Input
                         value={category}
                         onChange={handleChangeStateInput}
                         required
                         label="Name of category"
                     />
-                    <Button
-                        title="Create"
-                        variant="success"
-                        onclick={handleCreateCategory}
-                    />
+                    <Button title="Create" variant="success" onclick={handleCreateCategory} />
                 </div>
             </Modal>
             <Modal
@@ -197,18 +192,14 @@ const CategoryList = () => {
                 title="Update category"
                 close={() => handleToggleUpdateModal(selectedCategory)}
             >
-                <div className="flex flex-col items-start justify-center gap-5 w-full px-8 py-6">
+                <div className="flex w-full flex-col items-start justify-center gap-5 px-8 py-6">
                     <Input
                         value={category}
                         onChange={handleChangeStateInput}
                         required
                         label="Name of category"
                     />
-                    <Button
-                        title="Update"
-                        variant="info"
-                        onclick={handleUpdateCategory}
-                    />
+                    <Button title="Update" variant="info" onclick={handleUpdateCategory} />
                 </div>
             </Modal>
             <Modal
@@ -216,28 +207,21 @@ const CategoryList = () => {
                 title="Delete category"
                 close={() => handleToggleDeleteModal(selectedCategory)}
             >
-                <div className="flex flex-col items-center justify-center py-6 gap-3">
+                <div className="flex flex-col items-center justify-center gap-3 py-6">
                     <p className="text-xl font-bold">
-                        Are you sure to delete{" "}
-                        {categories[selectedCategory]?.name} category
+                        Are you sure to delete {categories[selectedCategory]?.name} category
                     </p>
-                    <div className="flex items-center justify-between w-1/4">
-                        <Button
-                            title="Yes"
-                            variant="error"
-                            onclick={handleDeleteCategory}
-                        />
+                    <div className="flex w-1/4 items-center justify-between">
+                        <Button title="Yes" variant="error" onclick={handleDeleteCategory} />
                         <Button
                             title="No"
                             variant="secondary"
-                            onclick={() =>
-                                handleToggleDeleteModal(selectedCategory)
-                            }
+                            onclick={() => handleToggleDeleteModal(selectedCategory)}
                         />
                     </div>
                 </div>
             </Modal>
-            <Loader isShow={categories.length == 0} />
+            <Loader isShow={isLoading} />
         </div>
     );
 };

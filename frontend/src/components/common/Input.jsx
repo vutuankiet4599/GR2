@@ -14,24 +14,20 @@ const Input = ({
     disabled = false,
     error,
     required,
+    multiple,
 }) => {
     return (
-        <div className="flex flex-col gap-2.5 text-lg">
+        <div className={`flex flex-col gap-2.5 text-lg ${style}`}>
             {label ? (
                 <label htmlFor={id} className="text-xl font-medium">
-                    {label}{" "}
-                    {required ? <span className="text-red-500">*</span> : <></>}
+                    {label} {required ? <span className="text-red-500">*</span> : <></>}
                 </label>
             ) : (
                 <></>
             )}
-            <div className="relative p-0 m-0">
+            <div className="relative m-0 p-0">
                 {icon && (
-                    <div
-                        className={
-                            "p-0 m-0 absolute left-2 top-3 text-indigo-600"
-                        }
-                    >
+                    <div className={"absolute left-2 top-3 m-0 p-0 text-indigo-600"}>
                         <FontAwesomeIcon icon={icon} />
                     </div>
                 )}
@@ -43,21 +39,18 @@ const Input = ({
                     value={value}
                     onChange={onChange}
                     disabled={disabled}
+                    multiple={multiple}
+                    required={required}
                     className={
                         type != "radio" && type != "checkbox"
-                            ? `h-12 ${
+                            ? `h-12 w-full ${
                                   icon ? "pl-9" : "px-3"
-                              } border-0 border-b-2 border-blue-500 focus:border-violet-500 hover:border-indigo-500 focus:outline-none transition ease-linear rounded-md` +
-                              style
-                            : "w-6 h-6 accent-indigo-500"
+                              } rounded-md border-0 border-b-2 border-blue-500 transition ease-linear hover:border-indigo-500 focus:border-violet-500 focus:outline-none`
+                            : "h-6 w-6 accent-indigo-500"
                     }
                 />
             </div>
-            {error ? (
-                <div className="text-red-500 text-lg">{error}</div>
-            ) : (
-                <></>
-            )}
+            {error ? <div className="text-lg text-red-500">{error}</div> : <></>}
         </div>
     );
 };
@@ -75,6 +68,7 @@ Input.propTypes = {
     disabled: PropTypes.bool,
     error: PropTypes.string,
     required: PropTypes.bool,
+    multiple: PropTypes.bool,
 };
 
 export default Input;

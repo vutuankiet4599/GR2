@@ -9,7 +9,7 @@ authAPI.interceptors.request.use(
         return req;
     },
 
-    (err) => Promise.resolve(err)
+    (err) => Promise.resolve(err),
 );
 
 export default authAPI;

@@ -9,19 +9,13 @@ let variantType = {
     warning: "bg-amber-500 hover:bg-amber-600 active:bg-amber-700",
 };
 
-const Button = ({
-    onclick,
-    variant,
-    title = "Button",
-    type = "button",
-    style,
-}) => {
+const Button = ({ onclick, variant, title = "Button", type = "button", style }) => {
     return (
         <button
             type={type}
             onClick={onclick}
             className={
-                "p-3 text-lg border-none outline-none text-white rounded-md" +
+                "rounded-md border-none p-3 text-lg text-white outline-none" +
                 " " +
                 variantType[variant] +
                 " " +
