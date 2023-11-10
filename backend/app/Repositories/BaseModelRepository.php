@@ -103,7 +103,7 @@ abstract class BaseModelRepository implements ModelRepositoryInterface
             }
 
             if ($step == 1 && $list[$i] != 'and') {
-                if ($list[$i+1] != 'and') {
+                if ($list[$i+1] != 'and' && $list[$i+1] != 'by') {
                     $list[$i+1] = $list[$i].ucfirst($list[$i+1]);
                     ++$i;
                 }

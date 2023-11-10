@@ -47,10 +47,8 @@ const UserList = () => {
 
     return (
         <div className="relative flex flex-col gap-3">
-            <div className="px-6 py-4 flex items-center shadow bg-slate-50">
-                <p className="text-gray-900 font-bold text-xl">
-                    User management
-                </p>
+            <div className="flex items-center bg-slate-50 px-6 py-4 shadow">
+                <p className="text-xl font-bold text-gray-900">User management</p>
             </div>
             <Table
                 headers={["Email", "Name", "Phone", "Status", "Action"]}
@@ -72,16 +70,12 @@ const UserList = () => {
                                 <Button
                                     title="Block"
                                     variant={"error"}
-                                    onclick={() =>
-                                        handleUpdateStatusUser(user.id, false)
-                                    }
+                                    onclick={() => handleUpdateStatusUser(user.id, false)}
                                 />
                                 <Button
                                     title="Unblock"
                                     variant={"success"}
-                                    onclick={() =>
-                                        handleUpdateStatusUser(user.id, true)
-                                    }
+                                    onclick={() => handleUpdateStatusUser(user.id, true)}
                                 />
                             </div>
                         ),

@@ -1,6 +1,19 @@
 import authAPI from "../api/authAPI";
+import guestAPI from "../api/guestAPI";
 
 const CategoryService = {
+    getAllWithoutPaginate: () => {
+        return new Promise((resolve, reject) => {
+            try {
+                let data = guestAPI.get("/categories");
+
+                resolve(data);
+            } catch (error) {
+                reject(error);
+            }
+        });
+    },
+
     getAll: (page) => {
         return new Promise((resolve, reject) => {
             try {

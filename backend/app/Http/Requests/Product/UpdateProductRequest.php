@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Category;
+namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCategoryRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,10 @@ class CreateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required|string|max:50|min:3|unique:categories,name",
+            'name' => 'string|min:1|max:255',
+            'address' => 'string|min:1|max:255',
+            'quantity' => 'integer|min:1|max:9999',
+            'description' => 'string|min:1',
         ];
     }
 }

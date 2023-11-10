@@ -1,7 +1,4 @@
-import {
-    faChevronLeft,
-    faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
 import ReactPaginate from "react-paginate";
@@ -27,13 +24,13 @@ const Pagination = ({
                 onPageChange={handleChangePage}
                 pageRangeDisplayed={pageRange}
                 previousLabel={
-                    <span className="rounded-md w-15 h-10 p-2 flex gap-1 items-center justify-center bg-slate-50 text-zinc-700 hover:bg-indigo-500 hover:text-white transition-all ease-linear">
+                    <span className="w-15 flex h-10 items-center justify-center gap-1 rounded-md bg-slate-50 p-2 text-zinc-700 transition-all ease-linear hover:bg-indigo-500 hover:text-white">
                         <FontAwesomeIcon icon={faChevronLeft} />
                         <p className="text-lg">Previous</p>
                     </span>
                 }
                 nextLabel={
-                    <span className="rounded-md w-15 h-10 p-2 flex gap-1 items-center justify-center bg-slate-50 text-zinc-700 hover:bg-indigo-500 hover:text-white transition-all ease-linear">
+                    <span className="w-15 flex h-10 items-center justify-center gap-1 rounded-md bg-slate-50 p-2 text-zinc-700 transition-all ease-linear hover:bg-indigo-500 hover:text-white">
                         <p className="text-lg">Next</p>
                         <FontAwesomeIcon icon={faChevronRight} />
                     </span>

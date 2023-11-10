@@ -19,6 +19,19 @@ class CategoryController extends Controller
         $this->repository = $repository;
     }
 
+    public function all()
+    {
+        $resource = CategoryResource::collection(
+            $this->repository->getAll()
+        );
+
+        if ($resource->all() == null) {
+            return $this->success(["data" => [], "meta" => []], 'Found empty category');
+        }
+
+        return $this->success($resource);
+    }
+
     public function index()
     {
         $resource = CategoryResource::collection(

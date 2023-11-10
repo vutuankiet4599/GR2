@@ -26,102 +26,78 @@ const UserDetail = () => {
 
     return (
         <div className="relative flex flex-col gap-5">
-            <div className="px-6 py-4 flex items-center shadow bg-slate-50">
-                <p className="text-gray-900 font-bold text-xl">
+            <div className="flex items-center bg-slate-50 px-6 py-4 shadow">
+                <p className="text-xl font-bold text-gray-900">
                     User detail of {`${user.email} - ${user.name}`}
                 </p>
             </div>
-            <div className="flex flex-col gap-5 items-start justify-center w-full h-fit border shadow px-12 py-6">
-                <div className="flex gap-12 items-start justify-start w-full">
-                    <div className="m-0 p-0 flex flex-col h-full justify-between">
+            <div className="flex h-fit w-full flex-col items-start justify-center gap-5 border px-12 py-6 shadow">
+                <div className="flex w-full items-start justify-start gap-12">
+                    <div className="m-0 flex h-full flex-col justify-between p-0">
                         <Image
                             src={user.avatar ? user.avatar : "/user.png"}
                             alt={user.email}
                             style={"w-56 h-72 border p-3"}
                         />
                         <Link to={"/admin/users"}>
-                            <Button
-                                variant={"secondary"}
-                                title="Back"
-                                style={"w-full text-xl"}
-                            />
+                            <Button variant={"secondary"} title="Back" style={"w-full text-xl"} />
                         </Link>
                     </div>
                     <table cellPadding={"20px"} className="w-full">
                         <tbody>
                             <tr className="border">
-                                <td className="text-lg font-light border-r">
-                                    Name
-                                </td>
+                                <td className="border-r text-lg font-light">Name</td>
                                 <td className="">{user.name}</td>
                             </tr>
                             <tr className="border">
-                                <td className="text-lg font-light border-r">
-                                    Email
-                                </td>
+                                <td className="border-r text-lg font-light">Email</td>
                                 <td className="">{user.email}</td>
                             </tr>
                             <tr className="border">
-                                <td className="text-lg font-light border-r">
-                                    Phone
-                                </td>
+                                <td className="border-r text-lg font-light">Phone</td>
                                 <td className="">{user.phone}</td>
                             </tr>
                             <tr className="border">
-                                <td className="text-lg font-light border-r">
-                                    Role
-                                </td>
+                                <td className="border-r text-lg font-light">Role</td>
                                 <td className="">{user.role?.name}</td>
                             </tr>
                             <tr className="border">
-                                <td className="text-lg font-light border-r">
-                                    Status
-                                </td>
+                                <td className="border-r text-lg font-light">Status</td>
                                 <td className="">
                                     {user.isActive ? (
-                                        <Button
-                                            variant={"success"}
-                                            title="Active"
-                                        />
+                                        <Button variant={"success"} title="Active" />
                                     ) : (
-                                        <Button
-                                            variant={"error"}
-                                            title="Blocked"
-                                        />
+                                        <Button variant={"error"} title="Blocked" />
                                     )}
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div className="flex items-center justify-between w-full">
-                    <div className="border shadow m-0 p-0">
+                <div className="flex w-full items-center justify-between">
+                    <div className="m-0 border p-0 shadow">
                         <Table
                             headers={["ID", "Product name"]}
                             data={user.products?.map((product) => {
                                 return {
                                     Id: product.id,
                                     Name: (
-                                        <div className="break-words max-w-sm">
-                                            {product.name}
-                                        </div>
+                                        <div className="max-w-sm break-words">{product.name}</div>
                                     ),
                                 };
                             })}
                         />
                     </div>
-                    <div className="border shadow m-0 p-0">
+                    <div className="m-0 border p-0 shadow">
                         <Table
                             headers={["Review", "Ratings"]}
                             data={user.reviews?.map((review) => {
                                 return {
                                     review: (
-                                        <div className="break-words max-w-sm">
-                                            {review.review}
-                                        </div>
+                                        <div className="max-w-sm break-words">{review.review}</div>
                                     ),
                                     ratings: (
-                                        <div className="flex items-baseline h-fit w-fit gap-2">
+                                        <div className="flex h-fit w-fit items-baseline gap-2">
                                             <p>{review.ratings}</p>
                                             <FontAwesomeIcon
                                                 icon={faStar}
