@@ -15,6 +15,7 @@ const Input = ({
     error,
     required,
     multiple,
+    isChecked = false,
 }) => {
     return (
         <div className={`flex flex-col gap-2.5 text-lg ${style}`}>
@@ -48,6 +49,7 @@ const Input = ({
                               } rounded-md border-0 border-b-2 border-blue-500 transition ease-linear hover:border-indigo-500 focus:border-violet-500 focus:outline-none`
                             : "h-6 w-6 accent-indigo-500"
                     }
+                    checked={isChecked}
                 />
             </div>
             {error ? <div className="text-lg text-red-500">{error}</div> : <></>}
@@ -69,6 +71,7 @@ Input.propTypes = {
     error: PropTypes.string,
     required: PropTypes.bool,
     multiple: PropTypes.bool,
+    isChecked: PropTypes.bool,
 };
 
 export default Input;

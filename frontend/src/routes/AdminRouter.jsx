@@ -1,5 +1,6 @@
 import AdminLayout from "../components/admins/Layout";
 import CategoryList from "../views/Admin/Category/CategoryList";
+import EditUser from "../views/Admin/User/EditUser";
 import UserDetail from "../views/Admin/User/UserDetail";
 import UserList from "../views/Admin/User/UserList";
 import ComponentTest from "../views/ComponentTest";
@@ -19,6 +20,10 @@ const AdminRouter = {
         {
             path: "users/:id",
             element: <UserDetail />,
+        },
+        {
+            path: "users/edit/:id",
+            element: <EditUser />,
         },
         {
             path: "categories",

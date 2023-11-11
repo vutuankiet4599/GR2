@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UtilController;
@@ -42,12 +43,16 @@ Route::get("/categories", [CategoryController::class, "all"]);
 Route::middleware(['auth:sanctum', 'role.super_admin'])->prefix('admin')->group(function () {
     Route::get('/users', [UserController::class, 'index']);
     Route::get('/users/{id}', [UserController::class, 'show']);
+    Route::post('/users', [UserController::class, 'insert']);
+    Route::put('/users/status/{id}', [UserController::class, 'updateStatus']);
     Route::put('/users/{id}', [UserController::class, 'update']);
 
     Route::get('/categories', [CategoryController::class, 'index']);
     Route::post('/categories', [CategoryController::class, 'insert']);
     Route::put('/categories/{id}', [CategoryController::class, 'update']);
     Route::delete('/categories/{id}', [CategoryController::class, 'delete']);
+
+    Route::get('/roles', [RoleController::class, 'index']);
 });
 
 /**
