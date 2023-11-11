@@ -5,7 +5,7 @@ const authAPI = axiosInstanceGenerator();
 
 authAPI.interceptors.request.use(
     (req) => {
-        req.headers.Authorization = `Bearer ${SessionUtils.get("api_token")}`;
+        req.headers.Authorization = `Bearer ${SessionUtils.get("api-token")}`;
         return req;
     },
 

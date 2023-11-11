@@ -7,6 +7,7 @@ let variantType = {
     primary: "bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700",
     secondary: "bg-zinc-500 hover:bg-zinc-600 active:bg-zinc-700",
     warning: "bg-amber-500 hover:bg-amber-600 active:bg-amber-700",
+    user: "bg-zinc-900 hover:bg-zinc-800 active:bg-zinc-700",
 };
 
 const Button = ({ onclick, variant, title = "Button", type = "button", style }) => {
