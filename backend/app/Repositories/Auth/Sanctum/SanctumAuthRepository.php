@@ -3,6 +3,7 @@
 namespace App\Repositories\Auth\Sanctum;
 
 use App\Http\Resources\UserResource;
+use App\Models\Role;
 use App\Models\User;
 use App\Traits\ImageTrait;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,7 @@ class SanctumAuthRepository implements SanctumAuthRepositoryInterface
             'success' => true,
             'data' => [
                 'token' => $token,
-                'user' => $user,
+                'user' => $user->load('role'),
             ],
         ];
     }
@@ -42,20 +43,21 @@ class SanctumAuthRepository implements SanctumAuthRepositoryInterface
             $avatarLink = $this->uploadImageToStorage($data['avatar'], 'users');
         }
 
-        $user = User::create(array_merge($data, ['avatar' => $avatarLink]));
+        $role = Role::where('name', '=', "GUEST")->first();
+
+        $user = User::create(array_merge($data, ['avatar' => $avatarLink['link'], 'role_id' => $role->id]));
 
         return [
             'success' => true,
             'data' => [
                 'token' => $user->createToken('api-token')->plainTextToken,
-                'user' => $user,
+                'user' => $user->load('role'),
             ],
         ];
     }
 
     public function logout($user)
     {
-        Auth::logout();
         $user->tokens()->delete();
 
         return [

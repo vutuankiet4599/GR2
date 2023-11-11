@@ -1,27 +1,36 @@
-import {
-    faAngleDown,
-    faGear,
-    faSignOut,
-} from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faGear, faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useState } from "react";
 import AppContext from "../../context/AppContext";
+import AuthService from "../../services/AuthService";
+import { toast } from "react-toastify";
+import SessionUtils from "../../utils/SessonUtils";
 
 const Header = () => {
     const [isShow, setIsShow] = useState(false);
-    const { data } = useContext(AppContext);
+    const { data, action } = useContext(AppContext);
 
     const handleLogout = () => {
-        console.log("Logout");
+        AuthService.logout()
+            .then((response) => {
+                SessionUtils.delete("api-token");
+                action.setToken("");
+                action.setUser({});
+                toast.success(response.message);
+            })
+            .catch((error) => {
+                console.log(error);
+                toast.error(error.message);
+            });
     };
 
     return (
-        <div className="w-full h-24 bg-indigo-500 text-white shadow mb-5 rounded-b-md flex items-center justify-between px-8">
+        <div className="mb-5 flex h-24 w-full items-center justify-between rounded-b-md bg-indigo-500 px-8 text-white shadow">
             <div className=" text-2xl font-medium">
                 <p>Admin page</p>
             </div>
-            <div className="flex items-center justify-center gap-3 relative cursor-pointer">
-                <div className="w-14 h-14 rounded-full my-auto mx-0 p-0 border overflow-hidden">
+            <div className="relative flex cursor-pointer items-center justify-center gap-3">
+                <div className="mx-0 my-auto h-14 w-14 overflow-hidden rounded-full border p-0">
                     <img
                         src={data.user?.avatar ? data.user.avatar : "/user.png"}
                         alt="user"
@@ -29,14 +38,14 @@ const Header = () => {
                     />
                 </div>
                 <div
-                    className="text-4xl font-bold active:bg-sky-400 rounded-full flex justify-center items-center w-12 h-12"
+                    className="flex h-12 w-12 items-center justify-center rounded-full text-4xl font-bold active:bg-sky-400"
                     onClick={() => setIsShow(!isShow)}
                 >
                     <FontAwesomeIcon icon={faAngleDown} />
                 </div>
                 {isShow && (
-                    <div className="w-36 border rounded-b-lg bg-white absolute -bottom-24 right-0 shadow flex flex-col z-10">
-                        <div className="border-b flex items-center justify-between px-3 py-2 bg-white hover:bg-slate-300 transition-all ease-linear cursor-pointer">
+                    <div className="absolute -bottom-24 right-0 z-10 flex w-36 flex-col rounded-b-lg border bg-white shadow">
+                        <div className="flex cursor-pointer items-center justify-between border-b bg-white px-3 py-2 transition-all ease-linear hover:bg-slate-300">
                             <span>
                                 <FontAwesomeIcon
                                     icon={faGear}
@@ -44,12 +53,10 @@ const Header = () => {
                                 />
                             </span>
 
-                            <p className="text-lg font-medium text-black">
-                                Setting
-                            </p>
+                            <p className="text-lg font-medium text-black">Setting</p>
                         </div>
                         <div
-                            className="flex items-center justify-between px-3 py-2 bg-white hover:bg-slate-300 transition-all ease-linear cursor-pointer"
+                            className="flex cursor-pointer items-center justify-between bg-white px-3 py-2 transition-all ease-linear hover:bg-slate-300"
                             onClick={handleLogout}
                         >
                             <span>
@@ -59,9 +66,7 @@ const Header = () => {
                                 />
                             </span>
 
-                            <p className="text-lg font-medium text-black">
-                                Logout
-                            </p>
+                            <p className="text-lg font-medium text-black">Logout</p>
                         </div>
                     </div>
                 )}
