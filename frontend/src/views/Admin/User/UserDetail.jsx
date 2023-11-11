@@ -1,26 +1,29 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import UserService from "../../../services/UserService";
 import { toast } from "react-toastify";
 import Loader from "../../../components/common/Loader";
 import Image from "../../../components/common/Image";
 import Button from "../../../components/common/Button";
 import Table from "../../../components/common/Table";
+import Link from "../../../components/common/Link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 const UserDetail = () => {
     const { id } = useParams();
     const [user, setUser] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         UserService.getOneById(id)
             .then((response) => {
                 setUser(response.data);
+                setIsLoading(false);
             })
             .catch((error) => {
-                console.log(error);
                 toast.error(error.message);
+                setIsLoading(false);
             });
     }, [id]);
 
@@ -39,9 +42,14 @@ const UserDetail = () => {
                             alt={user.email}
                             style={"w-56 h-72 border p-3"}
                         />
-                        <Link to={"/admin/users"}>
-                            <Button variant={"secondary"} title="Back" style={"w-full text-xl"} />
-                        </Link>
+                        <div className="flex items-center justify-between gap-3">
+                            <Link link={"/admin/users"}>
+                                <Button variant={"secondary"} title="Back" style={"w-24 text-xl"} />
+                            </Link>
+                            <Link link={`/admin/users/edit/${user.id}`}>
+                                <Button variant={"info"} title="Edit" style={"w-24 text-xl"} />
+                            </Link>
+                        </div>
                     </div>
                     <table cellPadding={"20px"} className="w-full">
                         <tbody>
@@ -111,7 +119,7 @@ const UserDetail = () => {
                     </div>
                 </div>
             </div>
-            <Loader isShow={Object.keys(user).length == 0} />
+            <Loader isShow={isLoading} />
         </div>
     );
 };
