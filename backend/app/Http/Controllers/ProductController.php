@@ -20,6 +20,17 @@ class ProductController extends Controller
         $this->repository = $repository;
     }
 
+    public function home(Request $request)
+    {
+        $newestProducts = $this->repository->newestProducts();
+        $topOrderedProducts = $this->repository->topOrderedProducts();
+
+        return $this->success([
+            'newestProducts' => ProductResource::collection($newestProducts),
+            'topOrderedProducts' => ProductResource::collection($topOrderedProducts)
+        ]);
+    }
+
     public function userProducts(Request $request)
     {
         $resource = ProductResource::collection(

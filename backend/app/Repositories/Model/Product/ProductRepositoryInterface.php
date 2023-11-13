@@ -8,4 +8,6 @@ interface ProductRepositoryInterface extends ModelRepositoryInterface
 {
     public function addMedia($product, $listMedia);
     public function addCategories($product, $listCategories);
+    public function newestProducts();
+    public function topOrderedProducts();
 }

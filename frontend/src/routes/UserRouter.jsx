@@ -1,7 +1,7 @@
 import UserLayout from "../components/users/Layout";
-import ComponentTest from "../views/ComponentTest";
 import Login from "../views/User/Auth/Login";
 import Register from "../views/User/Auth/Register";
+import HomePage from "../views/User/HomePage";
 
 const UserRouter = {
     path: "/",
@@ -9,7 +9,7 @@ const UserRouter = {
     children: [
         {
             index: true,
-            element: <ComponentTest />,
+            element: <HomePage />,
         },
         {
             path: "/login",

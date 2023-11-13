@@ -7,7 +7,7 @@ const Image = ({ src, loading, alt, style }) => {
                 src={src}
                 alt={alt}
                 loading={loading ? loading : "lazy"}
-                className="object-cover"
+                className="h-full w-full object-cover"
             />
         </div>
     );
