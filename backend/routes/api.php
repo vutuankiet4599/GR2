@@ -35,7 +35,8 @@ Route::get('/user', [AuthController::class, 'user'])->middleware(['auth:sanctum'
 /**
  * API for every one
  */
-Route::get("/categories", [CategoryController::class, "all"]);
+Route::get('/categories', [CategoryController::class, 'all']);
+Route::get('/home', [ProductController::class, 'home']);
 
 /**
  * API for super admin
@@ -72,7 +73,7 @@ Route::middleware(['auth:sanctum', 'role.owner'])->prefix('owner')->group(functi
  * API for logged user
  */
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post("/images", [UtilController::class, 'insertImage']);
+    Route::post('/images', [UtilController::class, 'insertImage']);
 });
 
 /**

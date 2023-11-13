@@ -30,4 +30,14 @@ class ProductRepository extends BaseModelRepository implements ProductRepository
         $product->categories()->attach($listCategories);
         return $product->categories;
     }
+
+    public function newestProducts()
+    {
+        return $this->model->with('media')->latest()->take(10)->get();
+    }
+
+    public function topOrderedProducts()
+    {
+        return $this->model->with('media')->withCount('orders')->orderBy('orders_count', 'desc')->take(10)->get();
+    }
 }

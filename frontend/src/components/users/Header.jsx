@@ -6,6 +6,7 @@ import Link from "../common/Link";
 import AuthService from "../../services/AuthService";
 import SessionUtils from "../../utils/SessonUtils";
 import { toast } from "react-toastify";
+import CartIcon from "./CartIcon/CartIcon";
 
 const Header = () => {
     const [isShow, setIsShow] = useState(false);
@@ -14,7 +15,7 @@ const Header = () => {
     const handleLogout = () => {
         AuthService.logout()
             .then((response) => {
-                SessionUtils.delete("api-token");
+                SessionUtils.reset();
                 action.setToken("");
                 action.setUser({});
                 toast.success(response.message);
@@ -32,6 +33,7 @@ const Header = () => {
                 <p>Exchange website</p>
             </div>
             <div className="relative flex cursor-pointer items-center justify-center gap-3">
+                <CartIcon style={"mr-8"} />
                 {!data.token ? (
                     <>
                         <Link link="/login">Login</Link>

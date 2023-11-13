@@ -13,7 +13,7 @@ const Header = () => {
     const handleLogout = () => {
         AuthService.logout()
             .then((response) => {
-                SessionUtils.delete("api-token");
+                SessionUtils.reset();
                 action.setToken("");
                 action.setUser({});
                 toast.success(response.message);

@@ -1,10 +1,23 @@
 import authAPI from "../api/authAPI";
 
 const ProductService = {
+    home: () => {
+        return new Promise((resolve, reject) => {
+            try {
+                let response = authAPI.get("/home");
+
+                resolve(response);
+            } catch (error) {
+                reject(error);
+            }
+        });
+    },
+
     getProductsOfCurrentUser: (page = 1) => {
         return new Promise((resolve, reject) => {
             try {
                 let response = authAPI.get(`/owner/products/user?page=${page}`);
+
                 resolve(response);
             } catch (error) {
                 reject(error);
