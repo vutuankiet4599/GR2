@@ -10,4 +10,5 @@ interface ProductRepositoryInterface extends ModelRepositoryInterface
     public function addCategories($product, $listCategories);
     public function newestProducts();
     public function topOrderedProducts();
+    public function search($params);
 }

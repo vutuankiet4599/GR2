@@ -3,7 +3,7 @@ import CategoryList from "../views/Admin/Category/CategoryList";
 import EditUser from "../views/Admin/User/EditUser";
 import UserDetail from "../views/Admin/User/UserDetail";
 import UserList from "../views/Admin/User/UserList";
-import ComponentTest from "../views/ComponentTest";
+import Blank from "../views/Blank";
 
 const AdminRouter = {
     path: "/admin",
@@ -11,7 +11,7 @@ const AdminRouter = {
     children: [
         {
             index: true,
-            element: <ComponentTest />,
+            element: <Blank />,
         },
         {
             path: "users",

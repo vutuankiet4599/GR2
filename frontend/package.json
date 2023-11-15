@@ -27,7 +27,8 @@
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.16.0",
     "react-toastify": "^9.1.2",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "swiper": "^11.0.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

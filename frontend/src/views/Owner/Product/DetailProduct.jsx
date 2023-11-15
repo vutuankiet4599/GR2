@@ -26,7 +26,7 @@ const DetailProduct = () => {
     };
 
     useEffect(() => {
-        ProductService.getOneById(id)
+        ProductService.getOneUserProductById(id)
             .then((response) => {
                 console.log(response.data);
                 setProduct(response.data);

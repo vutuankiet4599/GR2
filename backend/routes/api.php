@@ -37,6 +37,8 @@ Route::get('/user', [AuthController::class, 'user'])->middleware(['auth:sanctum'
  */
 Route::get('/categories', [CategoryController::class, 'all']);
 Route::get('/home', [ProductController::class, 'home']);
+Route::get('/products/search', [ProductController::class, 'search']);
+Route::get('/products/{id}', [ProductController::class, 'find']);
 
 /**
  * API for super admin

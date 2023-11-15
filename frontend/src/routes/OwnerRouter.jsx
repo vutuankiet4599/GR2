@@ -1,5 +1,5 @@
 import AdminLayout from "../components/admins/Layout";
-import ComponentTest from "../views/ComponentTest";
+import Blank from "../views/Blank";
 import CreateProduct from "../views/Owner/Product/CreateProduct";
 import DetailProduct from "../views/Owner/Product/DetailProduct";
 import EditProduct from "../views/Owner/Product/EditProduct";
@@ -11,7 +11,7 @@ const OwnerRouter = {
     children: [
         {
             index: true,
-            element: <ComponentTest />,
+            element: <Blank />,
         },
         {
             path: "products",

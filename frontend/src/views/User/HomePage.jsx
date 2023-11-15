@@ -27,11 +27,13 @@ const HomePage = () => {
             <Banner images={images} />
             <div className="flex w-full flex-col items-start justify-start gap-16 px-14 py-8">
                 <div className="flex w-full flex-col gap-5 rounded bg-white px-3 py-4 shadow-sm">
-                    <p className="fond-bold text-2xl uppercase text-orange-500">Newest products</p>
+                    <p className="fond-bold w-fit border-b-2 border-orange-300 text-2xl uppercase text-orange-500">
+                        Newest products
+                    </p>
                     <Slider items={data.newestProducts} />
                 </div>
                 <div className="flex w-full flex-col gap-5 rounded bg-white px-3 py-4 shadow-sm">
-                    <p className="fond-bold text-2xl uppercase text-orange-500">
+                    <p className="fond-bold w-fit border-b-2 border-orange-300 text-2xl uppercase text-orange-500">
                         Top popular products
                     </p>
                     <Slider items={data.topOrderedProducts} />

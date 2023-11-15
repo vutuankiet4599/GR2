@@ -12,7 +12,7 @@ const Select = ({
     style,
 }) => {
     return (
-        <div className={`flex w-fit flex-col items-start gap-2.5 p-0 text-lg ${style}`}>
+        <div className={`flex flex-col items-start gap-2.5 p-0 text-lg ${style}`}>
             <label htmlFor={id} className="text-xl font-medium">
                 {label} {required ? <span className="text-red-600">*</span> : <></>}
             </label>
