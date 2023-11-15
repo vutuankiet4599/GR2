@@ -11,6 +11,7 @@ const Pagination = ({
     pageRange = 5,
     total,
     to,
+    variant = "primary",
 }) => {
     return (
         <div className="flex items-center justify-between">
@@ -24,20 +25,36 @@ const Pagination = ({
                 onPageChange={handleChangePage}
                 pageRangeDisplayed={pageRange}
                 previousLabel={
-                    <span className="w-15 flex h-10 items-center justify-center gap-1 rounded-md bg-slate-50 p-2 text-zinc-700 transition-all ease-linear hover:bg-indigo-500 hover:text-white">
+                    <span
+                        className={`w-15 flex h-10 items-center justify-center gap-1 rounded-md ${
+                            variant == "primary"
+                                ? "bg-slate-50 text-zinc-700 hover:bg-indigo-500"
+                                : "bg-slate-50 text-zinc-900 hover:bg-zinc-900"
+                        } p-2 transition-all ease-linear hover:text-white`}
+                    >
                         <FontAwesomeIcon icon={faChevronLeft} />
                         <p className="text-lg">Previous</p>
                     </span>
                 }
                 nextLabel={
-                    <span className="w-15 flex h-10 items-center justify-center gap-1 rounded-md bg-slate-50 p-2 text-zinc-700 transition-all ease-linear hover:bg-indigo-500 hover:text-white">
+                    <span
+                        className={`w-15 flex h-10 items-center justify-center gap-1 rounded-md ${
+                            variant == "primary"
+                                ? "bg-slate-50 text-zinc-700 hover:bg-indigo-500"
+                                : "bg-slate-50 text-zinc-900 hover:bg-zinc-900"
+                        } p-2 transition-all ease-linear hover:text-white `}
+                    >
                         <p className="text-lg">Next</p>
                         <FontAwesomeIcon icon={faChevronRight} />
                     </span>
                 }
                 containerClassName="flex items-center justify-center gap-3"
-                pageClassName="w-10 h-10 flex rounded-full overflow-hidden items-center justify-center text-lg bg-slate-50 text-zinc-700 hover:bg-indigo-500 hover:text-white transition-all ease-linear"
-                activeClassName="active"
+                pageClassName={`w-10 h-10 flex rounded-full overflow-hidden items-center justify-center text-lg  ${
+                    variant == "primary"
+                        ? "bg-slate-50 text-zinc-700 hover:bg-indigo-500"
+                        : "bg-slate-50 text-zinc-900 hover:bg-zinc-900 hover:text-white"
+                }  hover:text-white  transition-all ease-linear`}
+                activeClassName={`active ${variant}`}
             />
         </div>
     );
@@ -51,6 +68,7 @@ Pagination.propTypes = {
     pageRange: PropTypes.number,
     total: PropTypes.number,
     to: PropTypes.number,
+    variant: PropTypes.string,
 };
 
 export default Pagination;

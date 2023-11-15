@@ -13,3 +13,16 @@ li.active {
     background-color: rgb(99 102 241 / 1);
     color: white;
 }
+
+li.active.user {
+    background-color: rgb(39 39 42 / 1);
+    color: white;
+}
+
+.preview .swiper-slide {
+    opacity: 0.5;
+}
+
+.preview .swiper-slide-thumb-active {
+    opacity: 1;
+}

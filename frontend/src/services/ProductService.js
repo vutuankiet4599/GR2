@@ -1,10 +1,45 @@
 import authAPI from "../api/authAPI";
+import guestAPI from "../api/guestAPI";
 
 const ProductService = {
     home: () => {
         return new Promise((resolve, reject) => {
             try {
                 let response = authAPI.get("/home");
+
+                resolve(response);
+            } catch (error) {
+                reject(error);
+            }
+        });
+    },
+
+    search: (params, page) => {
+        return new Promise((resolve, reject) => {
+            try {
+                let response = guestAPI.get("/products/search", {
+                    params: {
+                        page: page,
+                        search: params.get("search"),
+                        categories: params.getAll("categories"),
+                        address: params.get("address"),
+                        owner: params.get("owner"),
+                        date: params.get("date") == "true" ? 1 : 0,
+                        orders: params.get("orders") == "true" ? 1 : 0,
+                    },
+                });
+
+                resolve(response);
+            } catch (error) {
+                reject(error);
+            }
+        });
+    },
+
+    getOneById: (id) => {
+        return new Promise((resolve, reject) => {
+            try {
+                let response = guestAPI.get(`/products/${id}`);
 
                 resolve(response);
             } catch (error) {
@@ -25,7 +60,7 @@ const ProductService = {
         });
     },
 
-    getOneById: (id) => {
+    getOneUserProductById: (id) => {
         return new Promise((resolve, reject) => {
             try {
                 let response = authAPI.get(`/owner/products/user/${id}`);

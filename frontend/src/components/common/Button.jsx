@@ -8,6 +8,8 @@ let variantType = {
     secondary: "bg-zinc-500 hover:bg-zinc-600 active:bg-zinc-700",
     warning: "bg-amber-500 hover:bg-amber-600 active:bg-amber-700",
     user: "bg-zinc-900 hover:bg-zinc-800 active:bg-zinc-700",
+    outline_user:
+        "bg-white text-zinc-900 hover:bg-zinc-900 active:bg-zinc-700 hover:text-white border-zinc-800",
 };
 
 const Button = ({ onclick, variant, title = "Button", type = "button", style }) => {
@@ -16,7 +18,7 @@ const Button = ({ onclick, variant, title = "Button", type = "button", style }) 
             type={type}
             onClick={onclick}
             className={
-                "rounded-md border-none p-3 text-lg text-white outline-none" +
+                "rounded-md border p-3 text-lg text-white outline-none" +
                 " " +
                 variantType[variant] +
                 " " +

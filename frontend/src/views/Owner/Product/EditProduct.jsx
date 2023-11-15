@@ -36,7 +36,7 @@ const EditProduct = () => {
     };
 
     useEffect(() => {
-        ProductService.getOneById(id)
+        ProductService.getOneUserProductById(id)
             .then((response) => {
                 setProduct(response.data);
                 setDescription(response.data.description);
