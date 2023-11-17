@@ -2,13 +2,20 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
 import Button from "../../../components/common/Button";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ProductService from "../../../services/ProductService";
 import ThumbnailSlider from "../../../components/users/ThumbnailSlider";
+import Input from "../../../components/common/Input";
+import CartUtils from "../../../utils/CartUtils";
+import { toast } from "react-toastify";
+import AppContext from "../../../context/AppContext";
+import OrderService from "../../../services/OrderService";
 
 const ProductDetail = () => {
     const { id } = useParams();
     const [product, setProduct] = useState({});
+    const [cartQuantity, setCartQuantity] = useState(1);
+    const { action } = useContext(AppContext);
 
     useEffect(() => {
         ProductService.getOneById(id)
@@ -19,6 +26,30 @@ const ProductDetail = () => {
                 console.error(error);
             });
     }, [id]);
+
+    const handleAddToCart = () => {
+        let res = CartUtils.insert(product, parseInt(cartQuantity));
+        if (res.success) {
+            action.setCart(CartUtils.getCart());
+            toast.success(res.message);
+        } else {
+            toast.error(res.message);
+        }
+    };
+
+    const handleOrderNow = () => {
+        let orderProduct = product;
+        orderProduct["cartQuantity"] = 1;
+
+        OrderService.insert(orderProduct)
+            .then((response) => {
+                toast.success(response.message);
+            })
+            .catch((error) => {
+                toast.error(error.message);
+            });
+    };
+
     return (
         <div className="-my-4 flex min-h-screen w-full flex-col items-center justify-start bg-slate-50 px-12 py-8 text-zinc-900">
             <div className="mb-8 flex w-full border bg-white px-8 py-6">
@@ -61,10 +92,24 @@ const ProductDetail = () => {
                                 <td className="text-xl font-bold">Owner</td>
                                 <td className="text-lg font-medium">{product.user?.name}</td>
                             </tr>
+                            <tr>
+                                <td className="text-xl font-bold">Number to order</td>
+                                <td className="text-lg font-medium">
+                                    <Input
+                                        type="number"
+                                        value={cartQuantity}
+                                        onChange={(e) => setCartQuantity(e.target.value)}
+                                    />
+                                </td>
+                            </tr>
                         </table>
                         <div className="flex items-center justify-start gap-5">
-                            <Button title="Add to cart" variant="outline_user" />
-                            <Button title="Buy now" variant="user" />
+                            <Button
+                                title="Add to cart"
+                                variant="outline_user"
+                                onclick={handleAddToCart}
+                            />
+                            <Button title="Buy now" variant="user" onclick={handleOrderNow} />
                         </div>
                     </div>
                 </div>

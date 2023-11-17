@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TestController;
@@ -69,6 +70,8 @@ Route::middleware(['auth:sanctum', 'role.owner'])->prefix('owner')->group(functi
     Route::delete('/products/{id}', [ProductController::class, 'delete']);
 
     Route::post('/utils/images', [UtilController::class, 'insertFile']);
+
+    Route::get('/orders', [OrderController::class, 'currentOwnerOrders']);
 }); 
 
 /**
@@ -76,6 +79,12 @@ Route::middleware(['auth:sanctum', 'role.owner'])->prefix('owner')->group(functi
  */
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/images', [UtilController::class, 'insertImage']);
+
+    Route::get('/orders', [OrderController::class, 'currentUserOrders']);
+    Route::get('/orders/:id', [OrderController::class, 'find']);
+    Route::post('/orders', [OrderController::class, 'insert']);
+    Route::put('/orders/status/{id}', [OrderController::class, 'updateStatus']);
+    Route::delete('/orders/:id', [OrderController::class, 'delete']);
 });
 
 /**
