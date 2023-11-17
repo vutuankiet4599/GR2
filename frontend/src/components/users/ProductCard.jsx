@@ -2,11 +2,25 @@ import PropTypes from "prop-types";
 import Image from "../common/Image";
 import Button from "../common/Button";
 import Link from "../common/Link";
+import CartUtils from "../../utils/CartUtils";
+import { toast } from "react-toastify";
+import { useContext } from "react";
+import AppContext from "../../context/AppContext";
+
 const ProductCard = ({ product }) => {
+    const { action } = useContext(AppContext);
+
     const handleAddToCart = (e) => {
         e.preventDefault();
-        console.log("Added with event: " + e);
+        let res = CartUtils.insert(product, 1);
+        if (res.success) {
+            action.setCart(CartUtils.getCart());
+            toast.success(res.message);
+        } else {
+            toast.error(res.message);
+        }
     };
+
     return (
         <Link link={`/products/${product.id}`}>
             <div className="flex h-fit w-60 flex-col items-center justify-start gap-5 border bg-white p-0 shadow">

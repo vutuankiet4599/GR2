@@ -60,6 +60,11 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    public function requestedOrders()
+    {
+        return $this->hasManyThrough(Order::class, Product::class);
+    }
+
     public function userRequests()
     {
         return $this->hasMany(UserRequest::class);

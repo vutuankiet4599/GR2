@@ -3,10 +3,12 @@ import AppContext from "./AppContext";
 import PropTypes from "prop-types";
 import SessionUtils from "../utils/SessonUtils";
 import AuthService from "../services/AuthService";
+import CartUtils from "../utils/CartUtils";
 
 const AppProvider = ({ children }) => {
     const [token, setToken] = useState(SessionUtils.get("api-token"));
     const [user, setUser] = useState(null);
+    const [cart, setCart] = useState(CartUtils.getCart());
 
     useEffect(() => {
         if (token && !user) {
@@ -23,8 +25,8 @@ const AppProvider = ({ children }) => {
     return (
         <AppContext.Provider
             value={{
-                data: { token, user },
-                action: { setToken, setUser },
+                data: { token, user, cart },
+                action: { setToken, setUser, setCart },
             }}
         >
             {children}

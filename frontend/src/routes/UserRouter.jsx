@@ -5,6 +5,7 @@ import HomePage from "../views/User/HomePage";
 import ProductDetail from "../views/User/Product/ProductDetail";
 import ProductSearch from "../views/User/Product/ProductSearch";
 import ComponentTest from "../views/ComponentTest";
+import Cart from "../views/User/Cart/Cart";
 
 const UserRouter = {
     path: "/",
@@ -33,6 +34,10 @@ const UserRouter = {
         {
             path: "/search",
             element: <ProductSearch />,
+        },
+        {
+            path: "/cart",
+            element: <Cart />,
         },
     ],
 };
