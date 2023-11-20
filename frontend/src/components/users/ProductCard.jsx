@@ -32,7 +32,7 @@ const ProductCard = ({ product }) => {
                                 : "/product.jpg"
                             : "/product.jpg"
                     }
-                    style={"w-full border h-54"}
+                    style={"w-full border h-56"}
                 />
                 <p className="text-xl font-bold">{product.name}</p>
                 <p className="flex h-fit w-full flex-wrap items-center justify-center gap-3 text-lg">

@@ -24,7 +24,7 @@ class OrderController extends Controller
     public function currentOwnerOrders(Request $request)
     {
         $user = $request->user();
-        $data = $user->requestedOrders()->load('products');
+        $data = $user->requestedOrders()->load('product');
         
         return $this->success(OrderResource::make($data));
     }
@@ -32,7 +32,7 @@ class OrderController extends Controller
     public function currentUserOrders(Request $request)
     {
         $userId = $request->user()->id;
-        $data = $this->repository->getPaginateWithProductsByUseridEq($userId);
+        $data = $this->repository->getPaginateWithProductByUseridEq($userId);
 
         return $this->success(OrderResource::collection($data));
     }

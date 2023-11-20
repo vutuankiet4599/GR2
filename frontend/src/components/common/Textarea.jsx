@@ -13,9 +13,10 @@ const Textarea = ({
     required,
     style,
     label,
+    containerStyle,
 }) => {
     return (
-        <div className="flex w-full flex-col gap-2.5 text-lg">
+        <div className={`flex w-full flex-col gap-2.5 text-lg ${containerStyle}`}>
             {label ? (
                 <label htmlFor={id} className="text-xl font-medium">
                     {label} {required ? <span className="text-red-500">*</span> : <></>}
@@ -53,6 +54,7 @@ Textarea.propTypes = {
     required: PropTypes.bool,
     style: PropTypes.string,
     label: PropTypes.string,
+    containerStyle: PropTypes.string,
 };
 
 export default Textarea;
