@@ -6,6 +6,7 @@ import ProductDetail from "../views/User/Product/ProductDetail";
 import ProductSearch from "../views/User/Product/ProductSearch";
 import ComponentTest from "../views/ComponentTest";
 import Cart from "../views/User/Cart/Cart";
+import Chat from "../views/User/Chat/Chat";
 
 const UserRouter = {
     path: "/",
@@ -38,6 +39,10 @@ const UserRouter = {
         {
             path: "/cart",
             element: <Cart />,
+        },
+        {
+            path: "/chat",
+            element: <Chat />,
         },
     ],
 };

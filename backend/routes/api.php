@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UtilController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -81,11 +83,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/images', [UtilController::class, 'insertImage']);
 
     Route::get('/orders', [OrderController::class, 'currentUserOrders']);
-    Route::get('/orders/:id', [OrderController::class, 'find']);
+    Route::get('/orders/{id}', [OrderController::class, 'find']);
     Route::post('/orders', [OrderController::class, 'insert']);
     Route::put('/orders/status/{id}', [OrderController::class, 'updateStatus']);
-    Route::delete('/orders/:id', [OrderController::class, 'delete']);
+    Route::delete('/orders/{id}', [OrderController::class, 'delete']);
+
+    Route::post('/chat', [MessageController::class, 'chat']);
+    Route::get('/chat/users/{id}', [MessageController::class, 'getAllUsersToChat']);
+    Route::get('/chat/{firstUser}/{secondUser}', [MessageController::class, 'getAllMessagesOfTwoUsers']);
 });
+
 
 /**
  * API for testing

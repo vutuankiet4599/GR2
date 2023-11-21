@@ -17,6 +17,7 @@
         "laravel/sanctum": "^2.15",
         "laravel/scout": "^9.8",
         "laravel/tinker": "^2.0",
+        "pusher/pusher-php-server": "^7.2",
         "twilio/sdk": "^7.12"
     },
     "require-dev": {

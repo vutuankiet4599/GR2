@@ -12,7 +12,6 @@ const HomePage = () => {
     useEffect(() => {
         ProductService.home()
             .then((response) => {
-                console.log(response);
                 setData(response.data);
             })
             .catch((error) => {
