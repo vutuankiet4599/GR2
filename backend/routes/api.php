@@ -74,6 +74,8 @@ Route::middleware(['auth:sanctum', 'role.owner'])->prefix('owner')->group(functi
     Route::post('/utils/images', [UtilController::class, 'insertFile']);
 
     Route::get('/orders', [OrderController::class, 'currentOwnerOrders']);
+    Route::get('/orders/{id}', [OrderController::class, 'find']);
+    Route::put('/orders/status/{id}', [OrderController::class, 'updateStatus']);
 }); 
 
 /**
