@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Order\CreateOrderRequest;
 use App\Http\Requests\Order\UpdateOrderStatusRequest;
 use App\Http\Resources\OrderResource;
+use App\Models\User;
 use App\Repositories\Model\Order\OrderRepository;
 use App\Traits\ResponseTrait;
 use Carbon\Carbon;
@@ -23,10 +24,17 @@ class OrderController extends Controller
 
     public function currentOwnerOrders(Request $request)
     {
-        $user = $request->user();
-        $data = $user->requestedOrders()->load('product');
+        $user = User::find($request->user()->id);
+        $data = $user->requestedOrders()->with(['product', 'user'])->paginate(config('app.items_per_page'));
         
-        return $this->success(OrderResource::make($data));
+        return $this->success(OrderResource::collection($data)->response()->getData());
+    }
+
+    public function orderDetail(Request $request, $id)
+    {
+        $data = $this->repository->find($id)->load(['product', 'user']);
+
+        return $this->success(OrderResource::collection($data));
     }
 
     public function currentUserOrders(Request $request)
@@ -39,7 +47,7 @@ class OrderController extends Controller
 
     public function find(Request $request, $id)
     {
-        $data = $this->repository->find($id);
+        $data = $this->repository->find($id)->load(['product.media', 'user']);
 
         if ($data == null) {
             return $this->failure([], 'Order not found');

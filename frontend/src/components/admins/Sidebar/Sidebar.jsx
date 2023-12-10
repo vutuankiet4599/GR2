@@ -3,6 +3,7 @@ import { SidebarItem } from "./SidebarItem";
 import {
     faAngleLeft,
     faAngleRight,
+    faCartFlatbed,
     faHome,
     faListAlt,
     faThList,
@@ -22,46 +23,35 @@ const Sidebar = ({ style }) => {
             className={
                 (isShow ? "w-64" : "w-fit") +
                 " " +
-                "min-h-screen flex flex-col bg-indigo-500 relative" +
+                "relative flex min-h-screen flex-col bg-indigo-500" +
                 " " +
                 style
             }
         >
             <div
-                className="cursor-pointer w-12 h-12 rounded-full absolute top-8 -right-6 text-white bg-indigo-400 flex items-center justify-center text-3xl font-bold"
+                className="absolute -right-6 top-8 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-indigo-400 text-3xl font-bold text-white"
                 onClick={() => setIsShow(!isShow)}
             >
                 <FontAwesomeIcon icon={isShow ? faAngleRight : faAngleLeft} />
             </div>
             <Link to="/admin">
-                <div className="w-full flex gap-3 py-3 border-b-2 border-b-white mb-3">
-                    <div className="w-24 h-24 rounded-full">
-                        <img
-                            src="/icon.png"
-                            alt="web"
-                            className="object-fill"
-                        />
+                <div className="mb-3 flex w-full gap-3 border-b-2 border-b-white py-3">
+                    <div className="h-24 w-24 rounded-full">
+                        <img src="/icon.png" alt="web" className="object-fill" />
                     </div>
 
                     {isShow && (
                         <div className="flex items-center">
-                            <p className="text-xl font-bold text-white">
-                                Website for exchange
-                            </p>
+                            <p className="text-xl font-bold text-white">Website for exchange</p>
                         </div>
                     )}
                 </div>
             </Link>
 
-            <div className="flex flex-col grow px-3 items-center gap-2">
+            <div className="flex grow flex-col items-center gap-2 px-3">
                 {data.user?.role?.name == "SUPER_ADMIN" && (
                     <>
-                        <SidebarItem
-                            icon={faHome}
-                            title="Home"
-                            link="/admin"
-                            isShow={isShow}
-                        />
+                        <SidebarItem icon={faHome} title="Home" link="/admin" isShow={isShow} />
                         <SidebarItem
                             icon={faUser}
                             title="User"
@@ -82,6 +72,13 @@ const Sidebar = ({ style }) => {
                             icon={faThList}
                             title="Product"
                             link="/owner/products"
+                            isShow={isShow}
+                        />
+
+                        <SidebarItem
+                            icon={faCartFlatbed}
+                            title="Orders"
+                            link="/owner/orders"
                             isShow={isShow}
                         />
                     </>
