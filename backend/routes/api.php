@@ -92,6 +92,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('/chat', [MessageController::class, 'chat']);
     Route::get('/chat/users/{id}', [MessageController::class, 'getAllUsersToChat']);
+    Route::get('/chat/users', [MessageController::class, 'getAllUsersChatted']);
+    Route::get('/chat/owners', [MessageController::class, 'getAllOwner']);
     Route::get('/chat/{firstUser}/{secondUser}', [MessageController::class, 'getAllMessagesOfTwoUsers']);
 });
 

@@ -4,6 +4,7 @@ import {
     faAngleLeft,
     faAngleRight,
     faCartFlatbed,
+    faComment,
     faHome,
     faListAlt,
     faThList,
@@ -79,6 +80,13 @@ const Sidebar = ({ style }) => {
                             icon={faCartFlatbed}
                             title="Orders"
                             link="/owner/orders"
+                            isShow={isShow}
+                        />
+
+                        <SidebarItem
+                            icon={faComment}
+                            title="Chat"
+                            link="/owner/chat"
                             isShow={isShow}
                         />
                     </>
