@@ -30,6 +30,24 @@ class MessageController extends Controller
         return $this->success(UserResource::collection($users));
     }
 
+    public function getAllOwner(Request $request)
+    {
+        $owner = Role::where('name', '=', "OWNER")->first();
+        $users = User::where('role_id', '==', $owner['id'])->get();
+        return $this->success(UserResource::collection($users));
+    }
+
+    public function getAllUsersChatted(Request $request)
+    {
+        $userId = $request->user()->id;
+        $users = User::whereHas('sentMessages', function ($query) use ($userId) {
+            $query->where('to', $userId);
+        })->orWhereHas('receivedMessages', function ($query) use ($userId) {
+            $query->where('from', $userId);
+        })->get();
+        return $this->success(UserResource::collection($users));
+    }
+
     public function getAllMessagesOfTwoUsers(Request $request, $firstUser, $secondUser)
     {
         $data = Message::where(function ($query) use ($firstUser, $secondUser) {

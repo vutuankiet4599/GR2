@@ -1,5 +1,6 @@
 import AdminLayout from "../components/admins/Layout";
 import Blank from "../views/Blank";
+import Chat from "../views/Owner/Chat/Chat";
 import DetailOrder from "../views/Owner/Order/DetailOrder";
 import OrderList from "../views/Owner/Order/OrderList";
 import CreateProduct from "../views/Owner/Product/CreateProduct";
@@ -38,6 +39,10 @@ const OwnerRouter = {
         {
             path: "orders/:id",
             element: <DetailOrder />,
+        },
+        {
+            path: "chat",
+            element: <Chat />,
         },
     ],
 };
