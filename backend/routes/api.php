@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
@@ -42,6 +43,7 @@ Route::get('/categories', [CategoryController::class, 'all']);
 Route::get('/home', [ProductController::class, 'home']);
 Route::get('/products/search', [ProductController::class, 'search']);
 Route::get('/products/{id}', [ProductController::class, 'find']);
+Route::get('/reviews/products/{id}', [ReviewController::class, 'product']);
 
 /**
  * API for super admin
@@ -95,6 +97,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/chat/users', [MessageController::class, 'getAllUsersChatted']);
     Route::get('/chat/owners', [MessageController::class, 'getAllOwner']);
     Route::get('/chat/{firstUser}/{secondUser}', [MessageController::class, 'getAllMessagesOfTwoUsers']);
+
+    Route::post('/reviews', [ReviewController::class, 'insert']);
 });
 
 
