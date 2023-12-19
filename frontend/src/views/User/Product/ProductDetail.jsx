@@ -10,6 +10,7 @@ import CartUtils from "../../../utils/CartUtils";
 import { toast } from "react-toastify";
 import AppContext from "../../../context/AppContext";
 import OrderService from "../../../services/OrderService";
+import ReviewList from "../../../components/users/Review/ReviewList";
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -116,6 +117,9 @@ const ProductDetail = () => {
                 <div className="flex flex-col gap-5">
                     <p className="text-xl font-bold">Description</p>
                     <ReactQuill value={product.description} readOnly theme="bubble" />
+                </div>
+                <div className="flex h-fit w-full items-center justify-center">
+                    <ReviewList />
                 </div>
             </div>
         </div>
