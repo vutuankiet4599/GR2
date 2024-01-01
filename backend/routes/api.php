@@ -99,6 +99,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/chat/{firstUser}/{secondUser}', [MessageController::class, 'getAllMessagesOfTwoUsers']);
 
     Route::post('/reviews', [ReviewController::class, 'insert']);
+
+    Route::put('/users/password', [AuthController::class, 'changePassword']);
+    Route::put('/users/profile', [UserController::class, 'updateProfile']);
 });
 
 

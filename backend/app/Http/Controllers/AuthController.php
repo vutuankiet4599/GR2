@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\ChangePasswordRequest;
 use App\Http\Requests\Auth\Sanctum\SanctumLoginRequest;
 use App\Http\Requests\Auth\Sanctum\SanctumRegisterRequest;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use App\Repositories\Auth\Sanctum\SanctumAuthRepository;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -65,5 +69,22 @@ class AuthController extends Controller
         }
 
         return $this->failure([], 'Get user failed');
+    }
+
+    public function changePassword(ChangePasswordRequest $request)
+    {
+        $validated = $request->validated();
+
+        $user = User::with('role')->find($request->user()->id);
+        $newPassword = $validated['new_password'];
+
+        $user->password = Hash::make($newPassword);
+        $user->save();
+
+        return $this->success([
+            'user' => new UserResource($user),
+        ], 'Password reset successful');
+
+        return $this->success($validated);
     }
 }

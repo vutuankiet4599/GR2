@@ -7,6 +7,8 @@ import ProductSearch from "../views/User/Product/ProductSearch";
 import ComponentTest from "../views/ComponentTest";
 import Cart from "../views/User/Cart/Cart";
 import Chat from "../views/User/Chat/Chat";
+import EditProfile from "../views/User/Profile/EditProfile";
+import UserProfile from "../views/User/Profile/UserProfile";
 
 const UserRouter = {
     path: "/",
@@ -43,6 +45,14 @@ const UserRouter = {
         {
             path: "/chat",
             element: <Chat />,
+        },
+        {
+            path: "/profile",
+            element: <UserProfile />,
+        },
+        {
+            path: "/profile/edit",
+            element: <EditProfile />,
         },
     ],
 };

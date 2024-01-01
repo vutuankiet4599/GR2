@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\User\CreateUserRequest;
+use App\Http\Requests\User\UpdateProfileRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Requests\UserUpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Repositories\Model\User\UserRepository;
+use App\Traits\ImageTrait;
 use App\Traits\ResponseTrait;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,6 +18,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     use ResponseTrait;
+    use ImageTrait;
 
     private $repository;
 
@@ -76,6 +79,28 @@ class UserController extends Controller
         }
 
         return $this->success([], "User update succeeded");
+    }
+
+    public function updateProfile(UpdateProfileRequest $request)
+    {
+        $validated = $request->validated();
+        $link = "";
+
+        if (isset($validated['avatar']) && !empty($validated['avatar'])) {
+            $link = $this->uploadImageToStorage($validated['avatar'], 'users')['link'];
+        }
+
+        if (!empty($link)) {
+            $validated['avatar'] = $link;
+        }
+
+        $response = $this->repository->update($request->user()->id, $validated);
+
+        if (!$response) {
+            return $this->failure([], "User update failed");
+        }
+
+        return $this->success(new UserResource($response), "User update succeeded");
     }
 
     public function updateStatus(UserUpdateUserRequest $request, $id)

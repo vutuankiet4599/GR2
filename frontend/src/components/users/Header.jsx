@@ -46,7 +46,7 @@ const Header = () => {
                             <img
                                 src={data.user?.avatar ? data.user?.avatar : "/user.png"}
                                 alt="user"
-                                className="object-cover"
+                                className="h-full w-full object-cover"
                             />
                         </div>
                         <div
@@ -57,16 +57,18 @@ const Header = () => {
                         </div>
                         {isShow && (
                             <div className="absolute -bottom-24 right-0 z-10 flex w-36 flex-col rounded-b-lg border bg-white shadow">
-                                <div className="flex cursor-pointer items-center justify-between border-b bg-white px-3 py-2 transition-all ease-linear hover:bg-slate-300">
-                                    <span>
-                                        <FontAwesomeIcon
-                                            icon={faGear}
-                                            className="text-xl font-semibold text-gray-500"
-                                        />
-                                    </span>
+                                <Link link="/profile">
+                                    <div className="flex cursor-pointer items-center justify-between border-b bg-white px-3 py-2 transition-all ease-linear hover:bg-slate-300">
+                                        <span>
+                                            <FontAwesomeIcon
+                                                icon={faGear}
+                                                className="text-xl font-semibold text-gray-500"
+                                            />
+                                        </span>
 
-                                    <p className="text-lg font-medium text-black">Setting</p>
-                                </div>
+                                        <p className="text-lg font-medium text-black">Setting</p>
+                                    </div>
+                                </Link>
                                 <div
                                     className="flex cursor-pointer items-center justify-between bg-white px-3 py-2 transition-all ease-linear hover:bg-slate-300"
                                     onClick={handleLogout}
