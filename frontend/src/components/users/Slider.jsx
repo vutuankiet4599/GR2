@@ -28,7 +28,7 @@ const Slider = ({ items }) => {
         <>
             <Carousel
                 infinite={true}
-                autoPlay={false}
+                autoPlay={true}
                 containerClass="carousel-container w-full mx-auto px-12"
                 itemClass="carousel-image-item"
                 autoPlaySpeed={6000}
