@@ -20,6 +20,8 @@ class ProductResource extends JsonResource
             'address' => $this->address,
             'description' => $this->description,
             'quantity' => $this->quantity,
+            'avgRating' => $this->reviews_avg_ratings,
+            'reviewsCount' => $this->reviews_count,
             'user' => new UserResource($this->whenLoaded('user')),
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
             'media' => MediaResource::collection($this->whenLoaded('media')),

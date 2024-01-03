@@ -70,7 +70,7 @@ const ProductDetail = () => {
                         <h1 className="w-full break-words text-4xl font-bold text-orange-500">
                             {product.name}
                         </h1>
-                        <table cellPadding={20}>
+                        <table cellPadding={10}>
                             <tr>
                                 <td className="text-xl font-bold">Categories</td>
                                 <td className="flex flex-wrap gap-3 text-lg font-medium">

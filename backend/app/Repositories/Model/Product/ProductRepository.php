@@ -36,7 +36,7 @@ class ProductRepository extends BaseModelRepository implements ProductRepository
 
     public function newestProducts()
     {
-        return $this->model->with('media')->latest()->take(10)->get();
+        return $this->model->with('media')->withAvg('reviews', 'ratings')->latest()->take(15)->get();
     }
 
     public function topOrderedProducts()

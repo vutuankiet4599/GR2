@@ -26,10 +26,7 @@ const CartIcon = ({ style }) => {
             </Link>
             {cart.length > 0 && (
                 <div className="absolute -right-2.5 -top-2.5 flex h-5 w-5 items-center justify-center rounded-full bg-orange-500 text-sm text-white">
-                    {
-                        cart.reduce((total, item) => total.cartQuantity + item.cartQuantity)
-                            .cartQuantity
-                    }
+                    {cart.reduce((total, item) => total + item.cartQuantity, 0)}
                 </div>
             )}
             {isShow && (

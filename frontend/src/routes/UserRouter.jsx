@@ -9,6 +9,7 @@ import Cart from "../views/User/Cart/Cart";
 import Chat from "../views/User/Chat/Chat";
 import EditProfile from "../views/User/Profile/EditProfile";
 import UserProfile from "../views/User/Profile/UserProfile";
+import OrderList from "../views/User/Order/OrderList";
 
 const UserRouter = {
     path: "/",
@@ -53,6 +54,10 @@ const UserRouter = {
         {
             path: "/profile/edit",
             element: <EditProfile />,
+        },
+        {
+            path: "/orders",
+            element: <OrderList />,
         },
     ],
 };

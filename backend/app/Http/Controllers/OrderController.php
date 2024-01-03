@@ -40,9 +40,10 @@ class OrderController extends Controller
     public function currentUserOrders(Request $request)
     {
         $userId = $request->user()->id;
-        $data = $this->repository->getPaginateWithProductByUseridEq($userId);
+        // $data = $this->repository->getPaginateWithProductByUseridEq($userId);
+        $data = User::find($userId)->orders()->with(['product.media'])->paginate(config('app.items_perpage'));
 
-        return $this->success(OrderResource::collection($data));
+        return $this->success(OrderResource::collection($data)->response()->getData());
     }
 
     public function find(Request $request, $id)
