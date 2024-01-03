@@ -47,7 +47,7 @@ const UserProfile = () => {
     return (
         <div className="flex min-h-screen w-full flex-col items-center justify-start gap-3">
             <div className="flex h-fit w-full items-end justify-center gap-5 border-b-2">
-                <Link link="/user/order">My order</Link>
+                <Link link="/orders">My order</Link>
                 <Image
                     src={user.avatar ? user.avatar : "/user.png"}
                     style={"translate-y-6 w-28 h-28 rounded-full border"}

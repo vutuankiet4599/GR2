@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\ProductWithAverageRatingScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
@@ -28,6 +29,11 @@ class Product extends Model implements Explored
             'description' => 'text',
             'address' => 'text',
         ];
+    }
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new ProductWithAverageRatingScope());
     }
 
     public function user()
